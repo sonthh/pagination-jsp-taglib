@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+ 	<!-- ADMIN TEMPLATE -->
+	<definition name="admin.template" template="/WEB-INF/templates/admin/template.jsp">
+	    <put-attribute name="css" value="" />
+	    <put-attribute name="header" value="/WEB-INF/templates/admin/header.jsp" /><!-- no change -->
+	    <put-attribute name="left-sidebar" value="/WEB-INF/templates/admin/left-sidebar.jsp" /><!-- no change -->
+	    <put-attribute name="content" value="" />
+	    <put-attribute name="right-sidebar" value="/WEB-INF/templates/admin/right-sidebar.jsp" /><!-- no change -->
+	    <put-attribute name="js" value="" />
+	</definition>
+	
+  	<definition name="admin.index.index" extends="admin.template">
+  		<put-attribute name="css" value="/WEB-INF/templates/admin/index/index/css.jsp" />
+	    <put-attribute name="content" value="/WEB-INF/views/admin/index/index.jsp" />
+	    <put-attribute name="js" value="/WEB-INF/templates/admin/index/index/js.jsp" />
+	</definition>
+	
+	<definition name="admin.product.index" extends="admin.template">
+  		<put-attribute name="css" value="/WEB-INF/templates/admin/product/index/css.jsp" />
+	    <put-attribute name="content" value="/WEB-INF/views/admin/product/index.jsp" />
+	    <put-attribute name="js" value="/WEB-INF/templates/admin/product/index/js.jsp" />
+	</definition>
+	<definition name="admin.product.add" extends="admin.template">
+  		<put-attribute name="css" value="/WEB-INF/templates/admin/product/add/css.jsp" />
+	    <put-attribute name="content" value="/WEB-INF/views/admin/product/add.jsp" />
+	    <put-attribute name="js" value="/WEB-INF/templates/admin/product/add/js.jsp" />
+	</definition>
+	<definition name="admin.product.edit" extends="admin.template">
+  		<put-attribute name="css" value="/WEB-INF/templates/admin/product/edit/css.jsp" />
+	    <put-attribute name="content" value="/WEB-INF/views/admin/product/edit.jsp" />
+	    <put-attribute name="js" value="/WEB-INF/templates/admin/product/edit/js.jsp" />
+	</definition>
+	
+	<definition name="admin.user.index" extends="admin.template">
+  		<put-attribute name="css" value="/WEB-INF/templates/admin/user/index/css.jsp" />
+	    <put-attribute name="content" value="/WEB-INF/views/admin/user/index.jsp" />
+	    <put-attribute name="js" value="/WEB-INF/templates/admin/user/index/js.jsp" />
+	</definition>
+	<definition name="admin.user.search" extends="admin.template">
+  		<put-attribute name="css" value="/WEB-INF/templates/admin/user/search/css.jsp" />
+	    <put-attribute name="content" value="/WEB-INF/views/admin/user/search.jsp" />
+	    <put-attribute name="js" value="/WEB-INF/templates/admin/user/search/js.jsp" />
+	</definition>
+	<definition name="admin.user.add" extends="admin.template">
+  		<put-attribute name="css" value="/WEB-INF/templates/admin/user/add/css.jsp" />
+	    <put-attribute name="content" value="/WEB-INF/views/admin/user/add.jsp" />
+	    <put-attribute name="js" value="/WEB-INF/templates/admin/user/add/js.jsp" />
+	</definition>
+	<definition name="admin.user.edit" extends="admin.template">
+  		<put-attribute name="css" value="/WEB-INF/templates/admin/user/edit/css.jsp" />
+	    <put-attribute name="content" value="/WEB-INF/views/admin/user/edit.jsp" />
+	    <put-attribute name="js" value="/WEB-INF/templates/admin/user/edit/js.jsp" />
+	</definition>
+	
+	
+	
+</tiles-definitions>
