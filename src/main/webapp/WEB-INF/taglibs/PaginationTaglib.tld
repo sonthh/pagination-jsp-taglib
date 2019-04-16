@@ -24,7 +24,7 @@
         </attribute>
         <attribute>
             <name>numberOfPagesDisplay</name>
-            <required>true</required>
+            <required>false</required>
             <rtexprvalue>true</rtexprvalue>
             <type>int</type>
         </attribute>

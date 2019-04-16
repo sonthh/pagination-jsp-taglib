@@ -20,63 +20,46 @@ public class PaginationTaglib extends SimpleTagSupport {
 
 	@Override
 	public void doTag() throws JspException {
-		Writer out = getWriter();
 		List<Integer> paginations = PaginationHelper.makePagination(numberOfPages, numberOfPagesDisplay, currentPage);
-
+		StringBuilder html = new StringBuilder();
 		try {
-			out.write("<ul class='pagination'>");
-			if (uri.contains("?")) {
-				if (currentPage == 1) {
-					out.write("<li class='page-item disabled'><a class='page-link' href='javascript:void(0)' aria-label='Previous'><span class='mdi mdi-chevron-left' aria-hidden='true'></span></a></li>");
-				} else {
-					out.write("<li class='page-item'><a class='page-link' href='" + uri + "&page=" + (currentPage - 1) + "' aria-label='Previous'><span class='mdi mdi-chevron-left' aria-hidden='true'></span></a></li>");;
-				}
-				
-				for (Integer itemPage : paginations) {
-					if (itemPage == currentPage) {
-						out.write("<li class='page-item active'><a class='page-link' href='" + uri + "&page=" + itemPage + "'>" + itemPage + "</a></li>");
-					} else if (itemPage == -1) {
-						out.write("<li class='page-item disabled'><a class='page-link' href='javascript:void(0)'>...</a></li>");
-					} else if (itemPage == -2) {
-						out.write("<li class='page-item disabled'><a class='page-link'  href='javascript:void(0)'>...</a></li>");
-					} else {
-						out.write("<li class='page-item'><a class='page-link' href='" + uri + "&page=" + itemPage + "'>" + itemPage + "</a></li>");
-					}
-				}
-	             
-				if (currentPage == numberOfPages) {
-					out.write("<li class='page-item disabled'><a class='page-link' href='javascript:void(0)' aria-label='Next'><span class='mdi mdi-chevron-right' aria-hidden='true'></span></a></li>");
-				} else {
-					out.write("<li class='page-item'><a class='page-link' href='" + uri + "&page=" + (currentPage + 1) + "' aria-label='Next'><span class='mdi mdi-chevron-right' aria-hidden='true'></span></a></li>");
-				}
+			html.append("<ul class='d-flex justify-content-end pagination pagination-sm'>");
+			if (currentPage == 1) {
+				html.append("<li class='page-item disabled'><a class='page-link' href='javascript:void(0)' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>");
 			} else {
-				if (currentPage == 1) {
-					out.write("<li class='page-item disabled'><a class='page-link' href='javascript:void(0)' aria-label='Previous'><span class='mdi mdi-chevron-left' aria-hidden='true'></span></a></li>");
+				html.append("<li class='page-item'><a class='page-link' href='" + this.getLink(currentPage - 1) + "' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>");;
+			}
+			
+			for (Integer itemPage : paginations) {
+				if (itemPage == currentPage) {
+					html.append("<li class='page-item active'><a class='page-link' href='" + this.getLink(itemPage) + "'>" + itemPage + "</a></li>");
+				} else if (itemPage == -1) {
+					html.append("<li class='page-item disabled'><a class='page-link' href='javascript:void(0)'>...</a></li>");
+				} else if (itemPage == -2) {
+					html.append("<li class='page-item disabled'><a class='page-link'  href='javascript:void(0)'>...</a></li>");
 				} else {
-					out.write("<li class='page-item'><a class='page-link' href='" + uri + "?page=" + (currentPage - 1) + "' aria-label='Previous'><span class='mdi mdi-chevron-left' aria-hidden='true'></span></a></li>");;
-				}
-				
-				for (Integer itemPage : paginations) {
-					if (itemPage == currentPage) {
-						out.write("<li class='page-item active'><a class='page-link' href='" + uri + "?page=" + itemPage + "'>" + itemPage + "</a></li>");
-					} else if (itemPage == -1) {
-						out.write("<li class='page-item disabled'><a class='page-link' href='javascript:void(0)'>...</a></li>");
-					} else if (itemPage == -2) {
-						out.write("<li class='page-item disabled'><a class='page-link'  href='javascript:void(0)'>...</a></li>");
-					} else {
-						out.write("<li class='page-item'><a class='page-link' href='" + uri + "?page=" + itemPage + "'>" + itemPage + "</a></li>");
-					}
-				}
-	             
-				if (currentPage == numberOfPages) {
-					out.write("<li class='page-item disabled'><a class='page-link' href='javascript:void(0)' aria-label='Next'><span class='mdi mdi-chevron-right' aria-hidden='true'></span></a></li>");
-				} else {
-					out.write("<li class='page-item'><a class='page-link' href='" + uri + "?page=" + (currentPage + 1) + "' aria-label='Next'><span class='mdi mdi-chevron-right' aria-hidden='true'></span></a></li>");
+					html.append("<li class='page-item'><a class='page-link' href='" + this.getLink(itemPage) + "'>" + itemPage + "</a></li>");
 				}
 			}
-			out.write("</ul>");
+             
+			if (currentPage == numberOfPages) {
+				html.append("<li class='page-item disabled'><a class='page-link' href='javascript:void(0)' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>");
+			} else {
+				html.append("<li class='page-item'><a class='page-link' href='" + this.getLink(currentPage + 1) + "' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>");
+			}
+			html.append("</ul>");
+			
+			getWriter().write(html.toString());
 		} catch (java.io.IOException ex) {
 			throw new JspException("Error in Paginator tag", ex);
+		}
+	}
+	
+	private String getLink(int pageTarget) {
+		if (uri.contains("?")) {
+			return uri + "&page=" + pageTarget;
+		} else {
+			return uri + "?page=" + pageTarget;
 		}
 	}
 

@@ -2,7 +2,7 @@ package com.itsontran.constant;
 
 public class Defines {
 	// define number of 1 page
-	public static final int ROW_COUNT = 10;
+	public static final int ROW_COUNT = 2;
 	public static final int ROW_COUNT_PUBLIC = 6;
 	// define folder upload files
 	public static final String DIR_UPLOAD = "files";
